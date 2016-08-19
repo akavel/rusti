@@ -35,7 +35,11 @@ use std::path::PathBuf;
 pub mod completion;
 pub mod exec;
 pub mod input;
+#[cfg(not(windows))]
 pub mod readline;
+#[cfg(windows)]
+pub use rustyline as readline;
+pub mod rustyline;
 pub mod repl;
 
 /// Run `rusti` executable using `env::args`.
