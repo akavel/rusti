@@ -25,6 +25,7 @@ extern crate tempfile;
 
 #[macro_use] extern crate log;
 extern crate env_logger;
+#[macro_use] extern crate cfg_if;
 
 #[cfg(test)] #[macro_use] extern crate assert_matches;
 
@@ -35,11 +36,15 @@ use std::path::PathBuf;
 pub mod completion;
 pub mod exec;
 pub mod input;
-#[cfg(not(windows))]
-pub mod readline;
-#[cfg(windows)]
-pub use rustylinex as readline;
-pub mod rustylinex;
+cfg_if! {
+    if #[cfg(not(windows))] {
+        pub mod readline;
+    } else {
+        pub use rustylinex as readline;
+        pub mod rustylinex;
+        #[macro_use] extern crate lazy_static;
+    }
+}
 pub mod repl;
 
 /// Run `rusti` executable using `env::args`.
