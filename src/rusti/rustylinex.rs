@@ -6,6 +6,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
+extern crate rustyline;
+
+use self::rustyline::Editor;
 
 /// Reads a line from the input stream. The trailing newline is truncated.
 /// Returns `None` if end-of-file is signaled.

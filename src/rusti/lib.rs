@@ -38,8 +38,8 @@ pub mod input;
 #[cfg(not(windows))]
 pub mod readline;
 #[cfg(windows)]
-pub use rustyline as readline;
-pub mod rustyline;
+pub use rustylinex as readline;
+pub mod rustylinex;
 pub mod repl;
 
 /// Run `rusti` executable using `env::args`.
