@@ -7,3 +7,13 @@
 // except according to those terms.
 
 
+/// Reads a line from the input stream. The trailing newline is truncated.
+/// Returns `None` if end-of-file is signaled.
+pub fn read_line(prompt: &str) -> Option<String> {
+    None
+}
+
+/// Pushes a single line into `readline` history.
+pub fn push_history(line: &str) {
+}
+
