@@ -8,16 +8,23 @@
 
 extern crate rustyline;
 
+use std::sync::Mutex;
+
 use self::rustyline::Editor;
 
 lazy_static! {
-    static ref RL: Editor<()> = Editor::<()>::new();
+    // TODO(akavel): use completion from readline.rs
+    static ref RL: Mutex<Editor<()>> = Mutex::new(Editor::<()>::new());
 }
 
 /// Reads a line from the input stream. The trailing newline is truncated.
 /// Returns `None` if end-of-file is signaled.
 pub fn read_line(prompt: &str) -> Option<String> {
-    None
+    let line = RL.lock().unwrap().readline(prompt);
+    match line {
+        Ok(text) => Some(text),
+        Err(_)   => None,
+    }
 }
 
 /// Pushes a single line into `readline` history.
